@@ -11,22 +11,22 @@ headers = {
 dataStr = """method: search
 searchMethod: true
 searchTarget: ATM
-orgName: hvjckxzlh
-orgId: hvjczhlkcvx
+orgName: 
+orgId: 
 hid_1: 1
-tenderName: fdusahfd
-tenderId: ygviuxcgzuy
+tenderName: 
+tenderId: 
 tenderStatus: 5,6,20,28
 tenderWay: 
-awardAnnounceStartDate: 110/10/30
+awardAnnounceStartDate: 110/10/29
 awardAnnounceEndDate: 110/10/30
 proctrgCate: 
 tenderRange: 
 minBudget: 
 maxBudget: 
-item: hrjtkh
+item: 
 hid_2: 1
-gottenVendorName: vchxuoi
+gottenVendorName: 
 gottenVendorId: 
 hid_3: 1
 submitVendorName: 
@@ -56,5 +56,5 @@ print(data)
 res = requests.post(url, headers=headers, data=data)
 soup = BeautifulSoup(res.text, 'html.parser')
 
-print(soup)
-
+# print(soup)
+print(soup.select('table'))
