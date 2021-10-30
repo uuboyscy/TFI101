@@ -14,4 +14,19 @@ soupArticle = BeautifulSoup(resArticle.text, 'html.parser')
 
 articleContent = soupArticle.select('div[id="main-content"]')[0]
 
-print(articleContent.text.split('※ 發信站')[0])
+# print(articleContent.text.split('※ 發信站')[0])
+
+# print(articleContent)
+# print(articleContent.select('div'))
+# for i in articleContent.select('div'):
+#     print(i)
+
+tmpDiv = articleContent.select('div')
+# print(articleContent.select('div')[0])
+# print(articleContent.select('div')[0].extract())
+# print(articleContent.select('div')[0])
+for i in tmpDiv:
+    i.extract()
+print(tmpDiv)
+print('=================')
+print(articleContent)

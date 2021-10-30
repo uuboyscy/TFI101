@@ -33,7 +33,11 @@ for i in range(0, 5):
             # Get article content
             resArticle = requests.get(articleUrl, headers=headers)
             soupArticle = BeautifulSoup(resArticle.text, 'html.parser')
-            articleContent = soupArticle.select('div[id="main-content"]')[0].text.split('※ 發信站')[0]
+            # articleContent = soupArticle.select('div[id="main-content"]')[0].text.split('※ 發信站')[0]
+            for t in ['div', 'span']:
+                for i in soupArticle.select('div[id="main-content"]')[0].select(t):
+                    i.extract()
+            articleContent = soupArticle.select('div[id="main-content"]')[0].text
             try:
                 with open('./pttMovie/{}.txt'.format(title), 'w', encoding='utf-8') as f:
                     f.write(articleContent)
