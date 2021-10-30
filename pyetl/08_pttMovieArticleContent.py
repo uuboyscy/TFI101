@@ -1,6 +1,8 @@
 import os
 import requests
 from bs4 import BeautifulSoup
+import time
+import random
 
 if not os.path.exists('./pttMovie'):
     os.mkdir('./pttMovie')
@@ -25,6 +27,7 @@ for i in range(0, 5):
         # titleSoup.select('a')
         # -> [<a href="/bbs/movie/M.1635525796.A.C08.html">Re: [好無雷] 怒火 ：經典港片打出新高度</a>]
         try:
+            time.sleep(random.randint(1, 50)/10)
             title = titleSoup.select('a')[0].text
             articleUrl = "https://www.ptt.cc" + titleSoup.select('a')[0]['href']
             # Get article content
