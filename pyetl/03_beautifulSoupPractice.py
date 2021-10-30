@@ -36,9 +36,12 @@ print('=============')
 topbar = soup.select('div#topbar')
 print(topbar[0])
 print('------')
-print(topbar[0].select('a'))
+print(topbar[0].findAll('a'))
 for i in topbar[0].findAll('a'):
     print(i)
+print('-----')
+print(topbar[0].select_one('a'))
+print(topbar[0].find('a'))
 
 print('=============')
 
