@@ -1,16 +1,20 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 import poker as p
 import seriesFunction as s
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/source', static_folder='./static')
 
 @app.route('/')
 def index():
-    return 'Hello Flask!'
+    return '<a href="/source/css/style.css">Hello Flask!</a>'
 
 @app.route('/hello/<username>')
 def hello(username):
     return 'Hello {}'.format(username)
+
+@app.route('/hello2/<username>')
+def hello2(username):
+    return render_template('hello.html', username=username)
 
 @app.route('/add/<x>/<y>')
 def add(x, y):
@@ -38,6 +42,12 @@ def hello_get():
     outputString = "<h1>Hello {}, you are {} years old.</h1>"
     return outputString.format(name, age)
 
+@app.route('/hello_get2')
+def hello_get2():
+    name = request.args.get('name')
+    age = request.args.get('age')
+    return render_template('hello_get.html', name=name, age=age)
+
 @app.route('/hello_post', methods=['GET', 'POST'])
 def hello_post():
     outStr = """
@@ -56,6 +66,18 @@ def hello_post():
         """.format(username)
 
     return outStr
+@app.route('/hello_post2')
+def hello_post2():
+    username = ''
+    requestMethod = request.method
+    if requestMethod == 'POST':
+        username = request.form.get('username')
+    return render_template(
+        'hello_post.html',
+        username=username,
+        requestMethod=requestMethod
+    )
+
 
 # /poker?player=5
 @app.route('/poker')
@@ -66,6 +88,18 @@ def poker():
     # b = doSomething2(a)
 
     return jsonify(player_cards)
+
+@app.route('/poker2', methods=['GET', 'POST'])
+def poker2():
+    request_method = request.method
+    players = 0
+    cards = dict()
+    if request_method == 'POST':
+        players = int(request.form.get('players'))
+        cards = p.poker(players)
+    return render_template('poker.html'
+                           ,request_method=request_method
+                           ,cards=cards)
 
 # /getSeries?n=5
 @app.route('/getSeries')

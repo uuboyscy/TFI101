@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>poker</title>
+</head>
+<body>
+    <h1>How many players?</h1>
+    <form action="/poker2" method="post">
+        <input type="textbox" name="players">
+        <button type="submit">Submit</button>
+    </form>
+
+    <br>
+
+    {% if request_method == 'POST' %}
+    <div>
+        {% for player in cards %}
+        <div>
+            {{ player }}
+            <br>
+            <table border="1">
+                <tr>
+                    {% for card in cards[player] %}
+                    <td width="100">
+                        {{ card }}
+                    </td>
+                    {% endfor %}
+                </tr>
+            </table>
+        </div>
+        <br>
+        {% endfor %}
+    </div>
+    {% endif %}
+</body>
+</html>
