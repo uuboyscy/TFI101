@@ -1,8 +1,11 @@
 from flask import Flask, request, jsonify, render_template
 import poker as p
 import seriesFunction as s
+import model
+from test_controller import test_controller
 
 app = Flask(__name__, static_url_path='/source', static_folder='./static')
+app.register_blueprint(test_controller, url_prefix='/otherfunctions')
 
 @app.route('/')
 def index():
@@ -106,6 +109,13 @@ def poker2():
 def getSeries():
     n = int(request.args.get('n'))
     return str(s.Func(n))
+
+@app.route('/show_staff')
+def show_staff():
+    staff_data = model.getStaff()
+    column = ['ID', 'Name', 'DeptId', 'Age', 'Gender', 'Salary']
+    return render_template('show_staff.html', staff_data=staff_data,
+                                              column=column)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5001)

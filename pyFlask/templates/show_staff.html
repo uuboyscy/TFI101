@@ -1,10 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Staff</title>
 </head>
 <body>
-
+<div>
+    <table border="1" width="500">
+        <thead>
+            <tr>
+                {% for c in column %}
+                <th>
+                    {{ c }}
+                </th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for emp in staff_data %}
+            <tr>
+                {% for emp_info in emp %}
+                <td>
+                    {{ emp_info }}
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 </body>
 </html>
