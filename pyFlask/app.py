@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 import poker as p
+import seriesFunction as s
 
 app = Flask(__name__)
 
@@ -62,9 +63,15 @@ def poker():
     player = int(request.args.get('player'))
     player_cards = p.poker(player)
     # a = doSomething1()
-    # b = doSomething2(b)
+    # b = doSomething2(a)
 
     return jsonify(player_cards)
+
+# /getSeries?n=5
+@app.route('/getSeries')
+def getSeries():
+    n = int(request.args.get('n'))
+    return str(s.Func(n))
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5001)
