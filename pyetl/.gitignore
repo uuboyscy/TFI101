@@ -127,3 +127,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+/dcardphoto/
+/pttMovie/
+/res_gossiping/
