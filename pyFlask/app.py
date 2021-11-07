@@ -2,14 +2,15 @@ from flask import Flask, request, jsonify, render_template
 import poker as p
 import seriesFunction as s
 import model
-from test_controller import test_controller
+from test_controller import test_controller1
 
 app = Flask(__name__, static_url_path='/source', static_folder='./static')
-app.register_blueprint(test_controller, url_prefix='/otherfunctions')
+app.register_blueprint(test_controller1, url_prefix='/otherfunctions')
 
 @app.route('/')
 def index():
     return '<a href="/source/css/style.css">Hello Flask!</a>'
+    # return '<img src="/static/image.jpg">'
 
 @app.route('/hello/<username>')
 def hello(username):
